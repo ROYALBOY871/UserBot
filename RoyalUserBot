@@ -1,0 +1,46 @@
+_get_repolink () {
+    local regex
+    regex='(https?)://github.com/.+/.+'
+    if [[ $RoyalL_REPO == "RoyalBOT" ]]
+    then
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1MZWdlbmRCb3QvTEVHRU5EVVNFUkJPVC9hcmNoaXZlL0xlZ2VuZEJvdC56aXA=" | base64 -d
+    elif [[ $Royal_REPO == "RoyalBOT" ]]
+    then
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1MZWdlbmRCb3QvTEVHRU5EVVNFUkJPVC9hcmNoaXZlL0xlZ2VuZEJvdC56aXA=" | base64 -d
+    elif [[ $Royal_REPO =~ $regex ]]
+    then
+        if [[ $Royal_REPO_BRANCH ]]
+        then
+            echo "${Royal_REPO}/archive/${Royal_REPO_BRANCH}.zip"
+        else
+            echo "${Royal_REPO}/archive/master.zip"
+        fi
+    else
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1MZWdlbmRCb3QvTEVHRU5EVVNFUkJPVC9hcmNoaXZlL0xlZ2VuZEJvdC56aXA=" | base64 -d
+    fi
+}
+
+
+_setting_bot () {
+    local zippath
+    zippath="RoyalBot.zip"
+    echo "  Downloading LegendBot V3.O Source Code..."
+    wget -q $(_get_repolink) -O "$zippath"
+    echo "  Unpacking Data ..."
+    RoyalPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    unzip -qq "$zippath"
+    echo "Done"
+    echo "  RoyalBot V3.O Cleaning.."
+    rm -rf "$zippath"
+    sleep 5
+    cd $ROYALPATH
+    echo "    🦁Starting RoyalUserBot🦁     "
+    echo "
+    ⚔️⚔️⚔️⚔️⚔️⚔️⚔️
+    "
+
+    python3 ../setup/updater.py ../requirements.txt requirements.txt
+    python3 -m userbot
+}
+
+_setting_bot
