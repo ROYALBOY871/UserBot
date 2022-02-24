@@ -40,8 +40,8 @@
 [![String](https://te.legra.ph/file/66a4ca1da262c3203a336.jpg)](https://replit.com/@kartikGaming/ROYALBOTSTRING#main.py) 
 
 
-
-
+- String session bot [Telethon/pyrogram]
+[![String](https://te.legra.ph/file/c292649bc7be39ce206c2.jpg)](https://t.me/gjkik_bot)
 
 
 
