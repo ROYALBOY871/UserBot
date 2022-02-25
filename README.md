@@ -4,7 +4,7 @@
 
 ![ROYALBOT](https://te.legra.ph/file/0b232a504b17aed8658e9.jpg)
 <h6 align="center">
-  <b>⚡ ROYALBot Is One Of The lightest , fasted & Smoothest Bot On Telegram Based on Telethon⚡</b>
+  <b>⚡ ROYALBot Is One Of The lightest , fasted & Smoothest Bot On Telegram Based on Python⚡</b>
 </h6>
 
 <a href="https://github.com/ROYALBOY871/Userbot/graphs/contributors" alt="GitHub contributors"> <img src="https://img.shields.io/github/contributors/ROYALBOY871/Userbot?style=flat&logo=github" /> </a>
