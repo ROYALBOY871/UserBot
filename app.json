@@ -31,11 +31,11 @@
       "value": ""
     },
     "ROYALBOTSTRING": {
-      "description": "Get this from our Replit or from @gkgj_bot",
+      "description": "Get string from our Replit or from @gjkik_bot",
       "value": ""
     },
     "BOT_TOKEN": {
-      "description": "Needed for inline buttons maker. Make a bot at http://telegram.dog/BotFather and get the token of your bot.Worth it. Get it.",
+      "description": "Needed for inline buttons maker. Make a bot at @BotFather and get the token of your bot.",
       "value": ""
     },
     "HANDLER": {
