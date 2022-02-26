@@ -73,13 +73,13 @@
     "plan": "heroku-postgresql",
     "options": {
       "version": "12"
-    },
+    }
   },
    "UPSTREAM_REPO": {
       "description": "Test",
       "value": "pro",
       "required": false
-    
+    }
   }],
   "buildpacks": [{
     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
