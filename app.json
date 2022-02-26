@@ -31,7 +31,7 @@
       "value": ""
     },
     "ROYALBOTSTRING": {
-      "description": "Get this value by running python3 telesetup.py locally or soon",
+      "description": "Get this from our Replit or from @gkgj_bot",
       "value": ""
     },
     "BOT_TOKEN": {
