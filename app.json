@@ -57,6 +57,11 @@
       "description": "YOUR app name ",
       "value": "",
       "required": false
+   },
+    "SPAM": {
+      "description": "Required to Add Plugin Of Assistant Spam Bot",
+      "value": "",
+      "required": false
     },
     "TZ": {
       "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
@@ -68,6 +73,11 @@
     "plan": "heroku-postgresql",
     "options": {
       "version": "12"
+  },
+   "UPSTREAM_REPO": {
+      "description": "Test",
+      "value": "pro",
+      "required": false
     }
   }],
   "buildpacks": [{
