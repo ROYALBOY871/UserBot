@@ -1,62 +1,105 @@
-_get_repolink () {
+#!/bin/bash
+
+_get_zlink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $RoyalL_REPO == "RoyalBOT" ]]
+    if [[ $UPSTREAM_REPO == "pro" ]]
     then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1MZWdlbmRCb3QvTEVHRU5EVVNFUkJPVC9hcmNoaXZlL0xlZ2VuZEJvdC56aXA=" | base64 -d
-    elif [[ $Royal_REPO == "RoyalBOT" ]]
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9UL2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
+    elif [[ $UPSTREAM_REPO == "multi" ]]
     then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1MZWdlbmRCb3QvTEVHRU5EVVNFUkJPVC9hcmNoaXZlL0xlZ2VuZEJvdC56aXA=" | base64 -d
-    elif [[ $Royal_REPO =~ $regex ]]
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORFRFU1QvTEVHRU5EQk9UL2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
-        if [[ $Royal_REPO_BRANCH ]]
+        if [[ $UPSTREAM_REPO_BRANCH ]]
         then
-            echo "${Royal_REPO}/archive/${Royal_REPO_BRANCH}.zip"
+            echo "${UPSTREAM_REPO}/archive/${UPSTREAM_REPO_BRANCH}.zip"
         else
-            echo "${Royal_REPO}/archive/master.zip"
+            echo "${UPSTREAM_REPO}/archive/master.zip"
         fi
     else
-        echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1MZWdlbmRCb3QvTEVHRU5EVVNFUkJPVC9hcmNoaXZlL0xlZ2VuZEJvdC56aXA=" | base64 -d
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9UL2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
     fi
 }
 
+_get_repolink () {
+    local regex
+    local rlink
+    regex='(https?)://github.com/.+/.+'
+    if [[ $UPSTREAM_REPO == "pro" ]]
+    then
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9U" | base64 -d`
+    elif [[ $UPSTREAM_REPO == "multi" ]]
+    then
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORFRFU1QvTEVHRU5EQk9U" | base64 -d`
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
+    then
+        rlink=`echo "${UPSTREAM_REPO}"`
+    else
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9U" | base64 -d`
+    fi
+    echo "$rlink"
+}
 
-_setting_bot () {
+
+_run_python_code() {
+    python3${pVer%.*} -c "$1"
+}
+
+_run_catpackgit() {
+    $(_run_python_code 'from git import Repo
+import sys
+OFFICIAL_UPSTREAM_REPO = "https://github.com/LEGEND-AI/LEGENDBOT"
+ACTIVE_BRANCH_NAME = "master"
+repo = Repo.init()
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
+origin.fetch()
+repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
+repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+}
+
+_run_catgit() {
+    local repolink=$(_get_repolink)
+    $(_run_python_code 'from git import Repo
+import sys
+OFFICIAL_UPSTREAM_REPO="'$repolink'"
+ACTIVE_BRANCH_NAME = "'$UPSTREAM_REPO_BRANCH'" or "master"
+repo = Repo.init()
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
+origin.fetch()
+repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
+repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+}
+
+_start_bot () {
     local zippath
-    zippath="RoyalBot.zip"
-    echo "  Downloading RoyalBot V3.O Source Code..."
-    wget -q $(_get_repolink) -O "$zippath"
+    zippath="LEGENDBOT.zip"
+    echo "  Downloading source code ..."
+    wget -q $(_get_zlink) -O "$zippath"
     echo "  Unpacking Data ..."
-    PATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    CATPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
-    echo "  RoyalBot V3.O Cleaning.."
+    echo "  Cleaning ..."
     rm -rf "$zippath"
-    sleep 5
-    cd $ROYALPATH
-    echo "    
-┏━━━┳━━━┓╋╋╋┏━━━┳┓╋╋┏┓╋┏┳━━━┳━━━┳━━━┓
-┃┏━┓┃┏━┓┃╋╋╋┃┏━┓┃┃╋╋┃┃╋┃┃┏━┓┃┏━━┫┏━┓┃
-┃┗━┛┃┃╋┃┣┓╋┏┫┃╋┃┃┃╋╋┃┃╋┃┃┗━━┫┗━━┫┗━┛┃
-┃┏┓┏┫┃╋┃┃┃╋┃┃┗━┛┃┃╋┏┫┃╋┃┣━━┓┃┏━━┫┏┓┏┛
-┃┃┃┗┫┗━┛┃┗━┛┃┏━┓┃┗━┛┃┗━┛┃┗━┛┃┗━━┫┃┃┗┓
-┗┛┗━┻━━━┻━┓┏┻┛╋┗┻━━━┻━━━┻━━━┻━━━┻┛┗━┛
-╋╋╋╋╋╋╋╋┏━┛┃
-╋╋╋╋╋╋╋╋┗━━┛    "
-    echo "
-    
-┏━━━┳━━━┓╋╋╋┏━━━┳┓╋╋┏┓╋┏┳━━━┳━━━┳━━━┓
-┃┏━┓┃┏━┓┃╋╋╋┃┏━┓┃┃╋╋┃┃╋┃┃┏━┓┃┏━━┫┏━┓┃
-┃┗━┛┃┃╋┃┣┓╋┏┫┃╋┃┃┃╋╋┃┃╋┃┃┗━━┫┗━━┫┗━┛┃
-┃┏┓┏┫┃╋┃┃┃╋┃┃┗━┛┃┃╋┏┫┃╋┃┣━━┓┃┏━━┫┏┓┏┛
-┃┃┃┗┫┗━┛┃┗━┛┃┏━┓┃┗━┛┃┗━┛┃┗━┛┃┗━━┫┃┃┗┓
-┗┛┗━┻━━━┻━┓┏┻┛╋┗┻━━━┻━━━┻━━━┻━━━┻┛┗━┛
-╋╋╋╋╋╋╋╋┏━┛┃
-╋╋╋╋╋╋╋╋┗━━┛
-    "
-
+    _run_catpackgit
+    cd $CATPATH
+    _run_catgit
     python3 ../setup/updater.py ../requirements.txt requirements.txt
+    chmod -R 755 bin
+    echo "    Starting LegendUserBot    "
+
+    echo "
+    '##::::'##::'######::'########:'########::'########:::'#######::'########:
+     ##:::: ##:'##... ##: ##.....:: ##.... ##: ##.... ##:'##.... ##:... ##..::
+     ##:::: ##: ##:::..:: ##::::::: ##:::: ##: ##:::: ##: ##:::: ##:::: ##::::
+     ##:::: ##:. ######:: ######::: ########:: ########:: ##:::: ##:::: ##::::
+     ##:::: ##::..... ##: ##...:::: ##.. ##::: ##.... ##: ##:::: ##:::: ##::::
+     ##:::: ##:'##::: ##: ##::::::: ##::. ##:: ##:::: ##: ##:::: ##:::: ##::::
+    . #######::. ######:: ########: ##:::. ##: ########::. #######::::: ##::::
+    :.......::::......:::........::..:::::..::........::::.......::::::..:::::
+    "
     python3 -m userbot
 }
 
-_setting_bot
+_start_bot
