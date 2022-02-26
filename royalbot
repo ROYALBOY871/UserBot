@@ -27,7 +27,7 @@ _setting_bot () {
     echo "  Downloading RoyalBot V3.O Source Code..."
     wget -q $(_get_repolink) -O "$zippath"
     echo "  Unpacking Data ..."
-    RoyalPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    PATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
     echo "  RoyalBot V3.O Cleaning.."
