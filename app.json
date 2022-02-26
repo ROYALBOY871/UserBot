@@ -12,7 +12,7 @@
   ],
   "repository": "https://github.com/ROYALBOY871/Userbot/",
   "website": "https://github.com/ROYALBOY871/Userbot/",
-  "success_url": "https://t.me/KartiK_KinG01",
+  "success_url": "https://t.me/ROYALUBOT_SUPPORT",
   "env": {
     "ENV": {
       "description": "Set this to ANYTHING will enable heroku.",
