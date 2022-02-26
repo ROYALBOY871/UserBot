@@ -73,7 +73,7 @@
     "plan": "heroku-postgresql",
     "options": {
       "version": "12"
-    }
+    },
   },
    "UPSTREAM_REPO": {
       "description": "Test",
