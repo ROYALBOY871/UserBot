@@ -69,13 +69,13 @@
       "required": false
     }
   },
-  "addons": [{
+  "addons": {
     "plan": "heroku-postgresql",
     "options": {
       "version": "12"
     }
   },
-   "UPSTREAM_REPO": {
+   "UPSTREAM_REPO": [{
       "description": "Test",
       "value": "pro",
       "required": false
