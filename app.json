@@ -65,7 +65,7 @@
     },
     "AWAKE_PIC": {
       "description": "Put here any telegraph media link for awake pic in .awake Or .bot command.",
-      "value": "",
+      "value": "https://te.legra.ph/file/cf5518391b4bc0d6b9f21.jpg",
       "required": false
     },
     "OP_PIC": {
