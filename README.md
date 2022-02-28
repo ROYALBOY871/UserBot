@@ -54,7 +54,8 @@
 
 Soon available.....🔐
 
+•LICENSE
 ![LICENSE](https://te.legra.ph/file/cf5518391b4bc0d6b9f21.jpg)(https://www.gnu.org/graphics/gplv3-or-later.png)
-  •LICENSE
+  
   
   
