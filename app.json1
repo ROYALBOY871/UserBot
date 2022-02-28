@@ -141,7 +141,7 @@
       "value": ""
     }, 
     "ROYAL_STRING": {
-      "description": "Get this value by running https://repl.it/KartiK#main.py ",
+      "description": "Get this value by running https://replit.com/@kartikGaming/ROYALBOTSTRING#main.py ",
       "value":""
     },
     "HEROKU_API_KEY": {
