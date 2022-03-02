@@ -17,10 +17,10 @@
 [![Stars](https://img.shields.io/github/stars/ROYALBOY871/Userbot?style=flat-square&color=green)](https://github.com/TeamUltroid/Ultroid/stargazers)
 
 
-[![Forks](https://img.shields.io/github/forks/ROYALBOY871/Userbot?style=flat-square&color=orange)](https://github.com/TeamUltroid/Ultroid/fork)
+[![Forks](https://img.shields.io/github/forks/ROYALBOY871/Userbot?style=flat-square&color=orange)](https://github.com/ROYALBOY871/Userbot/fork)
 
 
-[![Size](https://img.shields.io/github/repo-size/ROYALBOY871/Userbot?style=flat-square&color=green)](https://github.com/TeamUltroid/Ultroid/)
+[![Size](https://img.shields.io/github/repo-size/ROYALBOY871/Userbot?style=flat-square&color=green)](https://github.com/ROYALBOY871/Userbot/)
 
    
 [![Python](https://img.shields.io/badge/Python-v3.10.2-blue)](https://www.python.org/)
