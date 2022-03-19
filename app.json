@@ -1,191 +1,54 @@
 {
-  "name": "ROYALUSERBOT",
-  "description": "Tнє ßєѕτ υѕєяϐοτ мα∂є ϐγ @KartiK_KinG01. Made with Love And By Python Language With Hardwork... ❤ ",
-  "logo": "https://te.legra.ph/file/7aec211ddcf909c6190a8.jpg",
+  "name": "ROYALẞøY",
+  "description": "One of the best and fastest Userbot for managing Your Telegram Account... Much secured than many other Userbots.... ❤️",
+  "logo": "https://te.legra.ph/file/7aec211ddcf909c6190a8.jpg ",
   "keywords": [
     "telegram",
     "userbot",
     "plugin",
-    "Royalbot",
+    "telethon",
+    "hellbot",
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/ROYALBOY871/Userbot/",
-  "website": "https://github.com/ROYALBOY871/Userbot/",
-  "success_url": "https://t.me/ROYALUBOT_SUPPORT",
+  "https://github.com/ROYALBOY871/Userbot/",
   "env": {
     "ENV": {
-      "description": "Set this to ANYTHING will enable heroku.",
+      "description": "Setting this to ANYTHING will enable heroku.",
       "value": "ANYTHING"
     },
-    "ALIVE_NAME": {
-      "description": "Fill your Full name. By default it is ROYAL User",
-      "value": "ROYALẞøY",
-      "required": false
-    },
-    "ALIVE_MSG": {
-      "description": "Set Custom Alive Message When entering .alive  Command.",
-      "value": "ROYALẞø† is Online",
-      "required": false
-    },
     "ABUSE": {
-      "description": " Set ON or OFF",
-      "value": "",
-      "required" :true
-    },
-    "EXTRA_PLUGIN": {
       "description": "Set ON or OFF",
-      "value": "",
-      "required" :true
-    },
-    "SPAM": {
-      "description": "Set ON or OFF",
-      "value": "",
-      "required" :true
-    },
-    "ASSISTANT": {
-      "description": "Set ON or OFF",
-      "value": "",
-      "required" :true
-    },
-    "YOUR_GROUP": {
-      "description": "Set Ur Group Username",
-      "value": "",
+      "value": "ON",
       "required": false
     },
-    "YOUR_CHANNEL": {
-      "description": "Set Ur Channel Username",
-      "value": "",
-      "required": false
-    },
-    "BOY_OR_GIRL": {
-      "description": "Set Boy Or Girl",
-      "value": "Boy",
-      "required": false
-    },
-    "AWAKE_PIC": {
-      "description": "Put here any telegraph media link for awake pic in .awake Or .bot command.",
-      "value": "https://te.legra.ph/file/7aec211ddcf909c6190a8.jpg",
-      "required": false
-    },
-    "OP_PIC": {
-      "description": "Put here any telegraph media link for OP pic in .op command.",
-      "value": "",
-      "required": false
-    },
-    "PING_PIC": {
-      "description": "Put here any telegraph media link for PING pic in .ping command.",
-      "value": "",
-      "required": false
-    },
-    "ALIVE_PIC": {
-      "description": "Put here any telegraph media link for alive pic in .alive.",
-      "value": "https://te.legra.ph/file/45ef597ef5ddc3039fc5c.jpg",
-      "required": false
-    },
-    "ALIVE_EMOJI": {
-      "description": "Put here any emoji. Which Will be Show When U Do .alive.",
-      "value": "",
-      "required": false
-    },
-    "BIO_MSG": {
-      "description": "Put Your Telegram Bio Here Required For Auto Bio.",
-      "value": "Royal boy.",
-      "required": true
-    },
-    "PM_PIC": {
-      "description": "put here any telegraph media link for custom pmpermit pic.",
-      "value": "",
-      "required": false
-    },
-    "PM_MSG": {
-      "description": "Enter Your custom pm permit msg.",
-      "value": "  Ħ€ŁŁØ ŞƗŘ/ΜƗŞŞ Ŵ€ŁĆØΜ€ ƗŇ ŘØ¥ΔŁβØ¥ ƗŇβØЖ❤️ƤŁ€ΔŞ€ ĐØŇ'Ŧ ŦŘ¥ ŦØ ŞƤΔΜ Μ¥ ΜΔŞŦ€Ř! /nƗ₣ ¥ØỮ ŴΔŇŦ ŦØ ĆĦΔŦ ŦĦ€Ň ҜƗŇĐŁ¥ ĆŁƗĆҜ β€ŁØŴ βỮŦŦØŇ!!ŦĦΔŇҜ ¥ØỮ!🇮🇳 ",
-      "required": false
-    },
-    "MAX_FLOOD_IN_PM": {
-      "description": "Now U Can Set Custom Flood In DM / PM by default it is 5",
-      "value": "5",
-      "required": true
-    },
-    "LOGGER_ID": {
-      "description": "Create a private channel. And get it's id from @missrose_bot and paste here. Value should start with -100",
-      "value": "",
-      "required": true
+    "HANDLER": {
+      "description": "Your command handler. Default is ' . ' (dot).",
+      "value": "."
     },
     "APP_ID": {
-      "description": "Get this value from my.telegram.org! Putting Others Value may result In Account Ban.",
+      "description": "Get this value from my.telegram.org",
       "value": ""
     },
-    "SUDO_USERS": {
-      "description": "Enter your friends user id to to give him bot full access",
-      "value": "",
-      "required": false
-    },
-    "SUDO_COMMAND_HAND_LER": {
-      "description": "Please enter sudo user command handler",
-      "value": ",",
-      "required": false
-    },
-    "COMMAND_HAND_LER": {
-      "description": "U can Change Ur command Handler By Default it is (.)",
-      "value": ".",
-      "required": true
-      },
     "API_HASH": {
-      "description": "Get this value from my.telegram.org! Putting Others Value May result In Account Ban.",
+      "description": "Get this value from my.telegram.org",
       "value": ""
     },
-    "PLUGIN_CHANNEL": {
-      "description": "Copy Group Id And paste here To Get Plugin Channel ID copy and paste here",
+    "ROYALBOT_SESSION": {
+      "description": "Please Get this value from Replit session or from our secured Telegram String Bot - @gjkik_bot (recommended)",
       "value": ""
-    }, 
-    "ROYAL_STRING": {
-      "description": "Get this value by running https://replit.com/@kartikGaming/ROYALBOTSTRING#main.py ",
-      "value":""
     },
     "HEROKU_API_KEY": {
-      "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API.Required for updater to work.",
-      "value": "",
-      "required": true
+      "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API. Required for updater to work.",
+      "value": ""
     },
     "HEROKU_APP_NAME": {
-      "description": "The Value of App Name you filled in right on top.Required for updater to work.",
-      "value": "",
-      "required": true
+      "description": "The Value of App Name you filled in right on top. Required for updater to work.",
+      "value": ""
     },
     "BOT_TOKEN": {
-      "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. And Don't Forget To Turn on inline Mode on bot settings. Get it.",
+      "description": "Make a bot from @BotFather and paste the bot token here.",
       "value": ""
-    },
-    "BOT_USERNAME": {
-      "description": "Needed for inline buttons maker. Make a bot at @BotFather and copy the username of your bot.",
-      "value": ""
-    },
-    "NO_OF_BUTTONS": {
-      "description": " Set The Amount Of Buttons Displayed In ROYAL Command default 6",
-      "value": "6",
-      "required": true
-    },
-    "NO_OF_COLUMNS": {
-      "description": "Set The Amount Of Rows You Want To Displayed In Royal Command default 3",
-      "value": "3",
-      "required": true
-    },
-    "EMOJI_IN_HELP1": {
-      "description": "Set The emojies You Want to Add In Help Command!!",
-      "value": "",
-      "required": false
-    },
-    "EMOJI_IN_HELP2": {
-      "description": "Set The emojies You Want to Add In Help Command!!",
-      "value": "",
-      "required": false
-    },
-    "PM_DATA": {
-      "description": "Type DISABLE if you want to disable pm protection... ",
-      "value": "ENABLE",
-      "required": true
     }
   },
   "addons": [{
@@ -210,4 +73,3 @@
     "url": "heroku/python"
   }]
 }
-
