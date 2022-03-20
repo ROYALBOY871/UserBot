@@ -1,59 +1,105 @@
 #!/bin/bash
 
-
-_python_() {
-    python3${pVer%.*} -c "$1"
+_get_zlink () {
+    local regex
+    regex='(https?)://github.com/.+/.+'
+    if [[ $UPSTREAM_REPO == "pro" ]]
+    then
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9UL2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
+    elif [[ $UPSTREAM_REPO == "multi" ]]
+    then
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORFRFU1QvTEVHRU5EQk9UL2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
+    then
+        if [[ $UPSTREAM_REPO_BRANCH ]]
+        then
+            echo "${UPSTREAM_REPO}/archive/${UPSTREAM_REPO_BRANCH}.zip"
+        else
+            echo "${UPSTREAM_REPO}/archive/master.zip"
+        fi
+    else
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9UL2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
+    fi
 }
 
-_HELLBOT_MAIN() {
-    $(_python_ 'from git import Repo
-import sys
-_UPSTREAM_ = "https://github.com/The-Hellbot/HellBot"
-_BRANCH_ = "master"
-repo = Repo.init()
-origin = repo.create_remote("temponame", _UPSTREAM_)
-origin.fetch()
-repo.create_head(_BRANCH_, origin.refs[_BRANCH_])
-repo.heads[_BRANCH_].checkout(True) ')
-}
-
-_hell_repo () {
-    local hrepo
-    hrepo=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnM=" | base64 -d`
+_get_repolink () {
+    local regex
+    local rlink
+    regex='(https?)://github.com/.+/.+'
+    if [[ $UPSTREAM_REPO == "pro" ]]
+    then
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9U" | base64 -d`
+    elif [[ $UPSTREAM_REPO == "multi" ]]
+    then
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORFRFU1QvTEVHRU5EQk9U" | base64 -d`
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
+    then
+        rlink=`echo "${UPSTREAM_REPO}"`
+    else
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0lUUy1MRUdFTkRCT1QvTEVHRU5EQk9U" | base64 -d`
+    fi
     echo "$rlink"
 }
 
-_hell_zip () {
-    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+
+_run_python_code() {
+    python3${pVer%.*} -c "$1"
 }
 
-_HELLBOT_PLUG() {
-    local hrepo=$(_hell_repo)
-    $(_python_ 'from git import Repo
+_run_catpackgit() {
+    $(_run_python_code 'from git import Repo
 import sys
-_UPSTREAM_ = "'$hrepo'"
-_BRANCH_ = "master"
+OFFICIAL_UPSTREAM_REPO = "https://github.com/LEGEND-AI/LEGENDBOT"
+ACTIVE_BRANCH_NAME = "master"
 repo = Repo.init()
-origin = repo.create_remote("temponame", _UPSTREAM_)
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
 origin.fetch()
-repo.create_head(_BRANCH_, origin.refs[_BRANCH_])
-repo.heads[_BRANCH_].checkout(True) ')
+repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
+repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
 }
 
-_starter () {
-    local hellpath
-    hellpath="Plugins.zip"
-    echo "••• INSTALLING ROYALBOT •••"
-    wget -q $(_hell_zip) -O "$hellpath"
-    HELLPATH=$(zipinfo -1 "$hellpath" | grep -v "/.");
-    unzip -qq "$hellpath"
-    rm -rf "$hellpath"
-    # _HELLBOT_MAIN
-    cd $HELLPATH
-    # _HELLBOT_PLUG
+_run_catgit() {
+    local repolink=$(_get_repolink)
+    $(_run_python_code 'from git import Repo
+import sys
+OFFICIAL_UPSTREAM_REPO="'$repolink'"
+ACTIVE_BRANCH_NAME = "'$UPSTREAM_REPO_BRANCH'" or "master"
+repo = Repo.init()
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
+origin.fetch()
+repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
+repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+}
+
+_start_bot () {
+    local zippath
+    zippath="LEGENDBOT.zip"
+    echo "  Downloading source code ..."
+    wget -q $(_get_zlink) -O "$zippath"
+    echo "  Unpacking Data ..."
+    CATPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    unzip -qq "$zippath"
+    echo "Done"
+    echo "  Cleaning ..."
+    rm -rf "$zippath"
+    _run_catpackgit
+    cd $CATPATH
+    _run_catgit
     python3 ../setup/updater.py ../requirements.txt requirements.txt
-    echo "••• STARTING ROYALBOY•••"
-    python3 -m royalbot
+    chmod -R 755 bin
+    echo "    Starting LegendUserBot    "
+
+    echo "
+    '##::::'##::'######::'########:'########::'########:::'#######::'########:
+     ##:::: ##:'##... ##: ##.....:: ##.... ##: ##.... ##:'##.... ##:... ##..::
+     ##:::: ##: ##:::..:: ##::::::: ##:::: ##: ##:::: ##: ##:::: ##:::: ##::::
+     ##:::: ##:. ######:: ######::: ########:: ########:: ##:::: ##:::: ##::::
+     ##:::: ##::..... ##: ##...:::: ##.. ##::: ##.... ##: ##:::: ##:::: ##::::
+     ##:::: ##:'##::: ##: ##::::::: ##::. ##:: ##:::: ##: ##:::: ##:::: ##::::
+    . #######::. ######:: ########: ##:::. ##: ########::. #######::::: ##::::
+    :.......::::......:::........::..:::::..::........::::.......::::::..:::::
+    "
+    python3 -m userbot
 }
 
-_starter
+_start_bot
