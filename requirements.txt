@@ -63,3 +63,4 @@ git+https://github.com/ROYALBOY871/py-googletrans
 git+https://github.com/ROYALBOY871/Wikipedia
 git+https://github.com/ROYALBOY871/youtube-dl
 git+https://github.com/ROYALBOY871/yt-search-python
+git+https://GitHub.com/ROYALBOY871/Telethon-Royal
