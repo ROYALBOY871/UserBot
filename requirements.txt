@@ -1,4 +1,5 @@
-
+aiofiles
+aiohttp
 apscheduler
 cairosvg
 cloudscraper
