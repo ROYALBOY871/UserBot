@@ -49,7 +49,7 @@ _run_python_code() {
 _run_catpackgit() {
     $(_run_python_code 'from git import Repo
 import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/ROYALBOY871/USERBOT"
+OFFICIAL_UPSTREAM_REPO = "https://github.com/ROYALBOY871/Userbot"
 ACTIVE_BRANCH_NAME = "master"
 repo = Repo.init()
 origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
@@ -73,7 +73,7 @@ repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
 
 _start_bot () {
     local zippath
-    zippath="ROYALUSERBOT.zip"
+    zippath="LEGENDBOT.zip"
     echo "  Downloading source code ..."
     wget -q $(_get_zlink) -O "$zippath"
     echo "  Unpacking Data ..."
