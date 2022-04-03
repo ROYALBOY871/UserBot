@@ -44,8 +44,8 @@ _starter () {
     local royalpath
     royalpath="Plugins.zip"
     echo "••• DOWNLOADING ROYALBOT •••"
-    wget -q $(_hell_zip) -O "$royalpath"
-    HELLPATH=$(zipinfo -1 "$royalpath" | grep -v "/.");
+    wget -q $(_royal_zip) -O "$royalpath"
+    ROYALPATH=$(zipinfo -1 "$royalpath" | grep -v "/.");
     unzip -qq "$royalpath"
     rm -rf "$royalpath"
     # _ROYALBOT_MAIN
