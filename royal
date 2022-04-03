@@ -1,105 +1,60 @@
 #!/bin/bash
 
-_get_zlink () {
-    local regex
-    regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO == "pro" ]]
-    then
-        echo "MjE3Y2FmNTVmNmUxNzNmNTMxMTliZjg4NDZkMTRhMzY5NmNiMDdkN2FjNjJiMjdiZWNlNTE1Y2E1Y2Y1ZWYwNyAgaGFzaGRpcy50eHQ=" | base64 -d
-    elif [[ $UPSTREAM_REPO == "multi" ]]
-    then
-        echo "MjE3Y2FmNTVmNmUxNzNmNTMxMTliZjg4NDZkMTRhMzY5NmNiMDdkN2FjNjJiMjdiZWNlNTE1Y2E1Y2Y1ZWYwNyAgaGFzaGRpcy50eHQ=" | base64 -d
-    elif [[ $UPSTREAM_REPO =~ $regex ]]
-    then
-        if [[ $UPSTREAM_REPO_BRANCH ]]
-        then
-            echo "${UPSTREAM_REPO}/archive/${UPSTREAM_REPO_BRANCH}.zip"
-        else
-            echo "${UPSTREAM_REPO}/archive/master.zip"
-        fi
-    else
-        echo "MjE3Y2FmNTVmNmUxNzNmNTMxMTliZjg4NDZkMTRhMzY5NmNiMDdkN2FjNjJiMjdiZWNlNTE1Y2E1Y2Y1ZWYwNyAgaGFzaGRpcy50eHQ=" | base64 -d
-    fi
-}
 
-_get_repolink () {
-    local regex
-    local rlink
-    regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO == "pro" ]]
-    then
-        rlink=`echo "MjE3Y2FmNTVmNmUxNzNmNTMxMTliZjg4NDZkMTRhMzY5NmNiMDdkN2FjNjJiMjdiZWNlNTE1Y2E1Y2Y1ZWYwNyAgaGFzaGRpcy50eHQ=" | base64 -d`
-    elif [[ $UPSTREAM_REPO == "multi" ]]
-    then
-        rlink=`echo "MjE3Y2FmNTVmNmUxNzNmNTMxMTliZjg4NDZkMTRhMzY5NmNiMDdkN2FjNjJiMjdiZWNlNTE1Y2E1Y2Y1ZWYwNyAgaGFzaGRpcy50eHQ=" | base64 -d`
-    elif [[ $UPSTREAM_REPO =~ $regex ]]
-    then
-        rlink=`echo "${UPSTREAM_REPO}"`
-    else
-        rlink=`echo "MjE3Y2FmNTVmNmUxNzNmNTMxMTliZjg4NDZkMTRhMzY5NmNiMDdkN2FjNjJiMjdiZWNlNTE1Y2E1Y2Y1ZWYwNyAgaGFzaGRpcy50eHQ=" | base64 -d`
-    fi
-    echo "$rlink"
-}
-
-
-_run_python_code() {
+_python_() {
     python3${pVer%.*} -c "$1"
 }
 
-_run_catpackgit() {
-    $(_run_python_code 'from git import Repo
+_ROYALBOT_MAIN() {
+    $(_python_ 'from git import Repo
 import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/ROYALBOY871/Userbot"
-ACTIVE_BRANCH_NAME = "master"
+_UPSTREAM_ = "https://github.com/ROYALBOY871/Userbot"
+_BRANCH_ = "master"
 repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
+origin = repo.create_remote("temponame", _UPSTREAM_)
 origin.fetch()
-repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
-repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+repo.create_head(_BRANCH_, origin.refs[_BRANCH_])
+repo.heads[_BRANCH_].checkout(True) ')
 }
 
-_run_catgit() {
-    local repolink=$(_get_repolink)
-    $(_run_python_code 'from git import Repo
-import sys
-OFFICIAL_UPSTREAM_REPO="'$repolink'"
-ACTIVE_BRANCH_NAME = "'$UPSTREAM_REPO_BRANCH'" or "master"
-repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
-origin.fetch()
-repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
-repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+_hell_repo () {
+    local hrepo
+    hrepo=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnM=" | base64 -d`
+    echo "$rlink"
 }
 
-_start_bot () {
-    local zippath
-    zippath="ROYALUSERBOT.zip"
-    echo "  Downloading source code ..."
-    wget -q $(_get_zlink) -O "$zippath"
-    echo "  Unpacking Data ..."
-    CATPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
-    unzip -qq "$zippath"
-    echo "Done"
-    echo "  Cleaning ..."
-    rm -rf "$zippath"
-    _run_catpackgit
-    cd $CATPATH
-    _run_catgit
+_hell_zip () {
+    echo "aHR0cHM6Ly9naXRodWIuY29tL1RoZS1IZWxsQm90L1BsdWdpbnMvYXJjaGl2ZS9tYXN0ZXIuemlw" | base64 -d
+}
+
+_ROYALBOT_PLUG() {
+    local hrepo=$(_hell_repo)
+    $(_python_ 'from git import Repo
+import sys
+_UPSTREAM_ = "'$hrepo'"
+_BRANCH_ = "master"
+repo = Repo.init()
+origin = repo.create_remote("temponame", _UPSTREAM_)
+origin.fetch()
+repo.create_head(_BRANCH_, origin.refs[_BRANCH_])
+repo.heads[_BRANCH_].checkout(True) ')
+}
+
+_starter () {
+    local royalpath
+    royalpath="Plugins.zip"
+    echo "••• DOWNLOADING ROYALBOT •••"
+    wget -q $(_hell_zip) -O "$royalpath"
+    HELLPATH=$(zipinfo -1 "$royalpath" | grep -v "/.");
+    unzip -qq "$royalpath"
+    rm -rf "$royalpath"
+    # _ROYALBOT_MAIN
+    cd $ROYALPATH
+    # _ROYALBOT_PLUG
     python3 ../setup/updater.py ../requirements.txt requirements.txt
-    chmod -R 755 bin
-    echo "    Starting ROYALBOT   "
-
-    echo "
-    '##::::'##::'######::'########:'########::'########:::'#######::'########:
-     ##:::: ##:'##... ##: ##.....:: ##.... ##: ##.... ##:'##.... ##:... ##..::
-     ##:::: ##: ##:::..:: ##::::::: ##:::: ##: ##:::: ##: ##:::: ##:::: ##::::
-     ##:::: ##:. ######:: ######::: ########:: ########:: ##:::: ##:::: ##::::
-     ##:::: ##::..... ##: ##...:::: ##.. ##::: ##.... ##: ##:::: ##:::: ##::::
-     ##:::: ##:'##::: ##: ##::::::: ##::. ##:: ##:::: ##: ##:::: ##:::: ##::::
-    . #######::. ######:: ########: ##:::. ##: ########::. #######::::: ##::::
-    :.......::::......:::........::..:::::..::........::::.......::::::..:::::
-    "
-    python3 -m userbot
+    echo "••• STARTING ROYALBOT •••"
+    python3 -m Royalbot
 }
 
-_start_bot
+_starter
+
